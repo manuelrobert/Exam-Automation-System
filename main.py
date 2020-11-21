@@ -4,13 +4,13 @@ import json
 import random
 import os
 import ast
-import ocr
-import comparetext
-from werkzeug.utils import secure_filename
-UPLOAD_FOLDER = "static/ansupload/"
+# import ocr
+# import comparetext
+# from werkzeug.utils import secure_filename
+# UPLOAD_FOLDER = "static/ansupload/"
 
 app=Flask(__name__)
-app.config['UPLOAD_FOLDER']= UPLOAD_FOLDER
+# app.config['UPLOAD_FOLDER']= UPLOAD_FOLDER
 
 @app.route('/login')
 def user_login():
@@ -642,58 +642,58 @@ def regexam():
 		conn.regexam(request.form['eid'], session['uname'])
 		return "Successfully registered for the examination"
 
-@app.route('/subfiledata', methods = ['GET', 'POST'])
-def subfiledata():
-	file  = request.files['file']
-	filename = secure_filename(file.filename)
-	file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-	conn.uplanswer(request.form['eid'], request.form['sid'], request.form['stid'], request.form['sectid'], request.form['qid'], file.filename)
-	return redirect('/clexammanage')
+# @app.route('/subfiledata', methods = ['GET', 'POST'])
+# def subfiledata():
+# 	file  = request.files['file']
+# 	filename = secure_filename(file.filename)
+# 	file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+# 	conn.uplanswer(request.form['eid'], request.form['sid'], request.form['stid'], request.form['sectid'], request.form['qid'], file.filename)
+# 	return redirect('/clexammanage')
 
-@app.route('/ansvaluate')
-def ansvaluate():
-	res = conn.getexmv()
-	print(res)
-	return render_template('advalmanage.html', a =res)
+# @app.route('/ansvaluate')
+# def ansvaluate():
+# 	res = conn.getexmv()
+# 	print(res)
+# 	return render_template('advalmanage.html', a =res)
 
-@app.route('/valuate_exm', methods = ['GET', 'POST'])
-def valuate_exm():
-	print(request.form['eid'])
-	e = conn.getec(request.form['eid'])
-	print('exm and crs',e)
-	qp = conn.getqppr(request.form['eid'])
-	print('quest struct', qp)
-	qpp = conn.getqppt(qp[0][0])
-	print('quest parts',qpp)
-	sub = conn.getsubcr(e[0][1])
-	print('subs',sub)
-	strn = conn.getstrnex(request.form['eid'])
-	print('roll no',strn)
-	for i in sub:
-		print(i[0])
-		qstp = conn.getqstp(i[0],e[0][0],e[0][1])
-		if qstp:
-			print(qstp)
-			for j in strn:
-				print(j[0])
-				for k in qstp:
-					print('gg',k)
-					ans = conn.getansstd(e[0][0], i[0], k[0], k[1], j[0])
-					if ans:
-						print(ans[0][0])
-						key = conn.getanskey(k[1])
-						print('key',key)
-						anstext=ocr.ocrResult('static/ansupload/'+ans[0][0])
-						anstext=anstext.replace("'","")
-						pro_text=comparetext.remove_stop_words(anstext,key[0][0])
-						similar=comparetext.get_cosine_similarity(pro_text["f1"],pro_text["f2"])
-						for l in qpp:
-							if l[0] == k[0]:
-								m = l[3]
-								break
-						mk = m * similar
-						conn.uplres(e[0][0], e[0][1], i[0], j[0], k[0], k[1], anstext, similar,mk)
-	return "Successfully completed valuation"
+# @app.route('/valuate_exm', methods = ['GET', 'POST'])
+# def valuate_exm():
+# 	print(request.form['eid'])
+# 	e = conn.getec(request.form['eid'])
+# 	print('exm and crs',e)
+# 	qp = conn.getqppr(request.form['eid'])
+# 	print('quest struct', qp)
+# 	qpp = conn.getqppt(qp[0][0])
+# 	print('quest parts',qpp)
+# 	sub = conn.getsubcr(e[0][1])
+# 	print('subs',sub)
+# 	strn = conn.getstrnex(request.form['eid'])
+# 	print('roll no',strn)
+# 	for i in sub:
+# 		print(i[0])
+# 		qstp = conn.getqstp(i[0],e[0][0],e[0][1])
+# 		if qstp:
+# 			print(qstp)
+# 			for j in strn:
+# 				print(j[0])
+# 				for k in qstp:
+# 					print('gg',k)
+# 					ans = conn.getansstd(e[0][0], i[0], k[0], k[1], j[0])
+# 					if ans:
+# 						print(ans[0][0])
+# 						key = conn.getanskey(k[1])
+# 						print('key',key)
+# 						anstext=ocr.ocrResult('static/ansupload/'+ans[0][0])
+# 						anstext=anstext.replace("'","")
+# 						pro_text=comparetext.remove_stop_words(anstext,key[0][0])
+# 						similar=comparetext.get_cosine_similarity(pro_text["f1"],pro_text["f2"])
+# 						for l in qpp:
+# 							if l[0] == k[0]:
+# 								m = l[3]
+# 								break
+# 						mk = m * similar
+# 						conn.uplres(e[0][0], e[0][1], i[0], j[0], k[0], k[1], anstext, similar,mk)
+# 	return "Successfully completed valuation"
 
 
 if __name__ == "__main__":
