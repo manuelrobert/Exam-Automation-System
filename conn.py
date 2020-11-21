@@ -460,3 +460,9 @@ def getanskey(qst):
 	z.execute("select qkey from tbl_question_pools where qid = '"+ str(qst) +"'")
 	res = z.fetchall()
 	return res
+
+def uplres(eid, cid, sid, rno, qse, qid, ans, sml, mar):
+	print('finally',eid, cid, sid, rno, qse, qid, ans, sml, mar)
+	z = con.cursor()
+	z.execute("insert into tbl_results (exmid, crsid, subid, stid, qsect, qid, ans, sml, marks) values('"+ str(eid) +"', '"+ str(cid) +"', '"+ str(sid) +"', '"+ str(rno) +"', '"+ str(qse) +"', '"+ str(qid) +"', '"+ str(ans) +"', '"+ str(sml) +"', '"+ str(mar) +"')")
+	con.commit()

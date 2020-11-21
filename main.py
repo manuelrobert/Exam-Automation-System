@@ -687,6 +687,12 @@ def valuate_exm():
 						anstext=anstext.replace("'","")
 						pro_text=comparetext.remove_stop_words(anstext,key[0][0])
 						similar=comparetext.get_cosine_similarity(pro_text["f1"],pro_text["f2"])
+						for l in qpp:
+							if l[0] == k[0]:
+								m = l[3]
+								break
+						mk = m * similar
+						conn.uplres(e[0][0], e[0][1], i[0], j[0], k[0], k[1], anstext, similar,mk)
 	return "Successfully completed valuation"
 
 
