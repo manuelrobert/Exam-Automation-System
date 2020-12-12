@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>SMARTxams - Student Hallticket</title>
+
+    <!-- Custom fonts for this template-->
+    <link href="/static/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link href="/static/css/sb-admin-2.min.css" rel="stylesheet">
+    <style type="text/css">
+        .Mystar {
+            color: Red;
+        }
+
+        .card {
+            box-shadow: 1px 4px 8px 1px rgba(0, 0, 0, 0.2);
+            width: 650px;
+            margin: auto;
+            text-align: left;
+            border: 2px solid;
+        }
+
+        button {
+            border: none;
+            outline: 0;
+            display: inline-block;
+            padding: 8px;
+            color: #000;
+            background-color: #3e9dff;
+            text-align: center;
+            cursor: pointer;
+            width: 10%;
+            font-size: 18px;
+            font-weight: bold;
+            float: right;
+        }
+
+        .title {
+            color: grey;
+            font-size: 18px;
+        }
+    </style>
+    <script>
+        function getexm(a, b, c, d, e, f) {
+            console.log(a, b, c, d, e, f);
+            $("#ttb").html("<div class='card shadow mb-4'>\
+				<div class='card-header py-3'>\
+				<h6 class='m-0 font-weight-bold text-primary'>"+ a + "</h6>\
+				</div>\
+				<div class='card-body'>\
+				<div class='table-responsive'>\
+					<table class='table table-bordered' id='dataTable' width='100%' cellspacing='0'>\
+					<tbody>\
+						<tr>\
+						<th>Exam</th>\
+						<td>"+ b + "</td>\
+						</tr>\
+                        <tr>\
+						<th>Starts from</th>\
+						<td>"+ c + "</td>\
+						</tr>\
+                        <tr>\
+						<th>Ends on</th>\
+						<td>"+ d + "</td>\
+						</tr>\
+                        <tr>\
+						<th>Semester</th>\
+						<td>"+ e + "</td>\
+						</tr>\
+                        <tr>\
+						<th>Registration Fees</th>\
+						<td>"+ f + "</td>\
+						</tr>\
+					</tbody>");
+            $("#cbt").html('<button class="btn btn-primary" type="button" data-dismiss="modal" onclick="rexam(\'' + a + '\')">Register</button>');
+        }
+        function rexam(value) {
+            console.log(value);
+            $.ajax({
+                url: '/regexam',
+                data: {
+                    eid: value
+                },
+                type: 'POST',
+                success: function (response) {
+                    console.log(response);
+                },
+                error: function (error) {
+
+                    console.log(error);
+                }
+            });
+        }
+    </script>
+
+</head>
+
+<body id="page-top">
+
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+        {% include "stsidenavbar.html" %}
+        {% include "sttopnavbar.html" %}
+        <!-- Begin Page Content -->
+        <div class="container-fluid">
+
+            <!-- Page Heading -->
+            <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                <h1 class="h3 mb-0 text-gray-800">Examinations Hallticket Download</h1>
+            </div>
+
+
+
+
+            <div id="div1" class="block">
+                <div class="form-body">
+
+                    <div id="div2" class="block">
+                        <table class="card">
+                            <tr>
+                                <td colspan="3" style="border-bottom: 2px solid;">
+                                    <table>
+                                        <tr>
+
+                                            <td>
+                                                <div>
+                                                    <span
+                                                        style="color: red; font-size: 30px; font-weight: bold;padding-left: 80px;">Examinations
+                                                        Name</span>
+                                                    <span
+                                                        style="color: #000; font-size: 20px; font-weight: bold; padding-left: 160px;">
+                                                        Hall Ticket</span><br />
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="3" style="text-align: center;">
+                                    <span style="color: #000; font-weight: bold;">(Information as furnished by the
+                                        Candidate)</span><br />
+                                    <span style="float: right; margin-right: 30px; font-size: 15px; font-weight: bold;">
+                                        Hall Ticket NO</span><br />
+                                    <br />
+                                    <div
+                                        style="float: right; border: 1px solid; width: 180px; height: 35px; margin-right: 7px;">
+                                        <span
+                                            style="float: right; margin-right: 30px; font-size: 15px; font-weight: bold;">
+
+                                    </div>
+                                    <br />
+                                    <div style="float: right; border: 1px solid; margin: 30px -135px 0 0;">
+
+                                    </div>
+                                    <br />
+                                    <div
+                                        style="float: right; border: 1px; width: 180px; height: 40px; margin: 135px -160px 0 0;">
+
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="3">
+                                    <table style="border: 1px solid; margin: -209px 0 0 10px; width: 415px; height: 155px;
+                                            font-weight: bold;">
+                                        <tr>
+                                            <td style="padding-left: 10px;">
+                                                NAME
+                                            </td>
+                                            <td>
+                                                :
+                                            </td>
+                                            <td>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="padding-left: 10px;">
+                                                Father name
+                                            </td>
+                                            <td>
+                                                :
+                                            </td>
+                                            <td>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="padding-left: 10px;">
+                                                Mobile No
+                                            </td>
+                                            <td>
+                                                :
+                                            </td>
+                                            <td>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="padding-left: 10px;">
+                                                Category
+                                            </td>
+                                            <td>
+                                                :
+                                            </td>
+                                            <td>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="padding-left: 10px;">
+                                                Address
+                                            </td>
+                                            <td>
+                                                :
+                                            </td>
+                                            <td>
+
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="3">
+                                    <table style="margin: -45px 0 0 10px; border: 1px solid; width: 200px; height: 100px;
+                                            font-weight: bold;">
+                                        <tr>
+                                            <td style="background: #ddd; text-align: center; border-bottom: 1px solid;">
+                                                <span>Test Date & Time</span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="text-align: center;">
+                                                <span>08-10-2017</span><br />
+                                                <span>Sunday</span><br />
+                                                <span>10.00 AM To 1.00 PM</span>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="3">
+                                    <table style="margin: -100px 0 0 220px; border: 1px solid; width: 205px; height: 100px;
+                                            font-weight: bold;">
+                                        <tr>
+                                            <td style="background: #ddd; text-align: center; border-bottom: 1px solid;">
+                                                <span>Test Center</span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="text-align: center;">
+                                                <span>Acharya Nagarjuna University</span><br />
+                                                <span>Guntur, Andhra Pradesh-522510</span><br />
+                                                <span>Phone No:8688 8896 33</span>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="3">
+                                    <span
+                                        style="margin: 20px 15px -86px 10px; float: left; font-weight: bold;">Signature
+                                        of the Candidate</span><br />
+                                    <br />
+                                    <span style="padding: 5px 20px 5px 10px;">(To be Signed in the presence of the
+                                        Invigilator)</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="3">
+
+                                    <span style="float: right; padding: 5px 20px 5px 0;">CONVENER</span>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <button>Print</button>
+
+
+            <!-- /.container-fluid -->
+
+        </div>
+        <!-- End of Main Content -->
+    </div>
+
+    <!-- Footer -->
+    <footer class="sticky-footer bg-white">
+        <div class="container my-auto">
+            <div class="copyright text-center my-auto">
+                <span>Copyright &copy; SmartExam</span>
+            </div>
+        </div>
+    </footer>
+    <!-- End of Footer -->
+
+    </div>
+    <!-- End of Content Wrapper -->
+
+    </div>
+    <!-- End of Page Wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+
+
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="/static/vendor/jquery/jquery.min.js"></script>
+    <script src="/static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="/static/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="/static/js/sb-admin-2.min.js"></script>
+
+    <!-- Page level plugins -->
+    <script src="/static/vendor/chart.js/Chart.min.js"></script>
+
+    <!-- Page level custom scripts -->
+    <script src="/static/js/demo/chart-area-demo.js"></script>
+    <script src="/static/js/demo/chart-pie-demo.js"></script>
+    <!-- modal -->
+    <div class="modal fade" id="q_up_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Exam Details</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div id="ttb">
+
+                </div>
+                <div class="modal-footer">
+                    <div id="cbt">
+                    </div>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- modal -->
+
+</body>
+
+</html>

@@ -641,6 +641,12 @@ def stexam():
 	print(res)
 	return render_template('stexmanage.html', a = res)
 
+	#Hall ticket generation route
+@app.route('/hallticket')
+def hallticket():
+	return render_template('hallticket.html')
+	
+
 @app.route('/regexam', methods = ['GET', 'POST'])
 def regexam():
 	res = conn.checkes(request.form['eid'], session['uname'])
