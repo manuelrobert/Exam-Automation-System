@@ -12,9 +12,18 @@ import ast
 app=Flask(__name__)
 # app.config['UPLOAD_FOLDER']= UPLOAD_FOLDER
 
+
+@app.route('/')
+def home_page():
+	return render_template('index.html')
+
 @app.route('/login')
 def user_login():
 	return render_template('login.html')
+
+@app.route('/forgot')
+def forgot_password():
+	return render_template('forgot-password.html')
 
 @app.route('/log_ver', methods=['GET', 'POST'])
 def log_ver():

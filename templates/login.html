@@ -2,117 +2,143 @@
 <html lang="en">
 
 <head>
-
   <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta name="author" content="">
 
-  <title>SMARTxams - Login</title>
+  <!-- SEO Meta Tags -->
+  <meta name="description"
+    content="Tivo is a HTML landing page template built with Bootstrap to help you crate engaging presentations for SaaS apps and convert visitors into users.">
+  <meta name="author" content="Inovatik">
 
-  <!-- Custom fonts for this template-->
-  <link href="/static/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-  <link
-    href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+  <!-- OG Meta Tags to improve the way the post looks when you share the page on LinkedIn, Facebook, Google+ -->
+  <meta property="og:site_name" content="" /> <!-- website name -->
+  <meta property="og:site" content="" /> <!-- website link -->
+  <meta property="og:title" content="" /> <!-- title shown in the actual shared post -->
+  <meta property="og:description" content="" /> <!-- description shown in the actual shared post -->
+  <meta property="og:image" content="" /> <!-- image link, make sure it's jpg -->
+  <meta property="og:url" content="" /> <!-- where do you want your post to link to -->
+  <meta property="og:type" content="article" />
+
+  <!-- Website Title -->
+  <title>SmartExam-Login</title>
+
+  <!-- Styles -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700&display=swap&subset=latin-ext"
     rel="stylesheet">
+  <link href="/static/index/css/bootstrap.css" rel="stylesheet">
+  <link href="/static/index/css/fontawesome-all.css" rel="stylesheet">
+  <link href="/static/index/css/swiper.css" rel="stylesheet">
+  <link href="/static/index/css/magnific-popup.css" rel="stylesheet">
+  <link href="/static/index/css/styles.css" rel="stylesheet">
 
-  <!-- Custom styles for this template-->
-  <link href="/static/css/sb-admin-2.min.css" rel="stylesheet">
-  <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
-  <!-- <script>
-    function ver_user() {
-      $.ajax({
-        url: '/log_ver',
-        data: {
-          uname :document.getElementById('uname').value,
-          pwd   :document.getElementById('pwd').value
-        },
-        type: 'POST',
-        success: function (response) {
-          console.log("GGG ");
-          // window.location.href="/edit_course_details"
-        },
-        error: function (error) {
-
-          console.log(error);
-        }
-      });
-    }
-  </script> -->
-
+  <!-- Favicon  -->
+  <link rel="icon" href="/static/index/images/favicon.png">
 </head>
 
-<body class="bg-gradient-primary">
+<body data-spy="scroll" data-target=".fixed-top">
 
-  <div class="container">
+  <!-- Preloader -->
+  <div class="spinner-wrapper">
+    <div class="spinner">
+      <div class="bounce1"></div>
+      <div class="bounce2"></div>
+      <div class="bounce3"></div>
+    </div>
+  </div>
+  <!-- end of preloader -->
 
-    <!-- Outer Row -->
-    <div class="row justify-content-center">
 
-      <div class="col-xl-10 col-lg-12 col-md-9">
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
+    <div class="container">
 
-        <div class="card o-hidden border-0 shadow-lg my-5">
-          <div class="card-body p-0">
-            <!-- Nested Row within Card Body -->
-            <div class="row">
-              <div class="col-lg-6 d-none d-lg-block bg-login-image"></div>
-              <div class="col-lg-6">
-                <div class="p-5">
-                  <div class="text-center">
-                    <h1 class="h4 text-gray-900 mb-4">Login</h1>
-                  </div>
-                  <form class="user" name="lgform" id="lgform" action="/log_ver" method="POST">
-                    <div class="form-group">
-                      <input type="text" class="form-control form-control-user" id="uname" name="uname"
-                        placeholder="Username">
-                    </div>
-                    <div class="form-group">
-                      <input type="password" class="form-control form-control-user" id="pwd" name="pwd"
-                        placeholder="Password">
-                    </div>
-                    <div class="form-group">
-                      <div class="custom-control custom-checkbox small">
-                        <input type="checkbox" class="custom-control-input" id="customCheck">
-                        <label class="custom-control-label" for="customCheck">Remember Me</label>
-                      </div>
-                    </div>
-                    <input type="submit" value="Login" class="btn btn-primary btn-user btn-block">
-                    <hr>
-                   
-                    
-                  </form>
-                  
-                  <div class="text-center">
-                    <a class="small" href="forgot-password.html">Forgot Password?</a>
-                    <hr>
-                  </div>
-                  <div class="text-center">
-                    <a class="small" href="accountc">Create an Account!</a>
-                    <hr>
-                  </div>
+      <!-- Text Logo - Use this if you don't have a graphic logo -->
+      <!-- <a class="navbar-brand logo-text page-scroll" href="index.html">Tivo</a> -->
+
+      <!-- Image Logo -->
+      <a class="navbar-brand logo-image" href="/" style="text-decoration: none;">
+        <h1>SmartExam</h1>
+      </a>
+
+      <!-- Mobile Menu Toggle Button -->
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
+        aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-awesome fas fa-bars"></span>
+        <span class="navbar-toggler-awesome fas fa-times"></span>
+      </button>
+      <!-- end of mobile menu toggle button -->
+
+      <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link page-scroll" href="/">HOME <span class="sr-only">(current)</span></a>
+          </li>
+        </ul>
+        <span class="nav-item">
+          <a class="btn-outline-sm" href="accountc">REGISTER</a>
+        </span>
+      </div>
+    </div> <!-- end of container -->
+  </nav> <!-- end of navbar -->
+  <!-- end of navigation -->
+
+
+  <!-- Header -->
+  <header id="header" class="ex-2-header">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <h1>Log In</h1>
+          <p>You don't have a password? Then please <a class="white" href="accountc">Sign Up</a></p>
+          <!-- Sign Up Form -->
+          <div class="form-container">
+            <form class="user" name="lgform" id="lgform" action="/log_ver" method="POST">
+              <div class="form-group">
+                <input type="text" class="form-control form-control-user" id="uname" name="uname"
+                  placeholder="Username">
+              </div>
+              <div class="form-group">
+                <input type="password" class="form-control form-control-user" id="pwd" name="pwd"
+                  placeholder="Password">
+              </div>
+              <div class="form-group">
+                <div class="custom-control custom-checkbox small">
+                  <input type="checkbox" class="custom-control-input" id="customCheck">
+                  <label class="custom-control-label" for="customCheck">Remember Me</label>
                 </div>
               </div>
+              <input type="submit" value="Login" class="btn btn-primary btn-user btn-block">
+              <hr>
+
+
+            </form>
+            <div class="text-center">
+              <a class="small" href="forgot">Forgot Password?</a>
             </div>
-          </div>
-        </div>
+            <div class="text-center">
+              <a class="small" href="accountc">Create an Account!</a>
+            </div>
+          </div> <!-- end of form container -->
+          <!-- end of sign up form -->
 
-      </div>
+        </div> <!-- end of col -->
+      </div> <!-- end of row -->
+    </div> <!-- end of container -->
+  </header> <!-- end of ex-header -->
+  <!-- end of header -->
 
-    </div>
 
-  </div>
-
-  <!-- Bootstrap core JavaScript-->
-  <script src="/static/vendor/jquery/jquery.min.js"></script>
-  <script src="/static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-  <!-- Core plugin JavaScript-->
-  <script src="/static/vendor/jquery-easing/jquery.easing.min.js"></script>
-
-  <!-- Custom scripts for all pages-->
-  <script src="/static/js/sb-admin-2.min.js"></script>
-
+  <!-- Scripts -->
+  <script src="/static/index/js/jquery.min.js"></script> <!-- jQuery for Bootstrap's JavaScript plugins -->
+  <script src="/static/index/js/popper.min.js"></script> <!-- Popper tooltip library for Bootstrap -->
+  <script src="/static/index/js/bootstrap.min.js"></script> <!-- Bootstrap framework -->
+  <script src="/static/index/js/jquery.easing.min.js"></script>
+  <!-- jQuery Easing for smooth scrolling between anchors -->
+  <script src="/static/index/js/swiper.min.js"></script> <!-- Swiper for image and text sliders -->
+  <script src="/static/index/js/jquery.magnific-popup.js"></script> <!-- Magnific Popup for lightboxes -->
+  <script src="/static/index/js/validator.min.js"></script>
+  <!-- Validator.js - Bootstrap plugin that validates forms -->
+  <script src="/static/index/js/scripts.js"></script> <!-- Custom scripts -->
 </body>
 
 </html>
