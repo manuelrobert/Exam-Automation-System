@@ -20,6 +20,7 @@
     <!-- Custom styles for this template-->
     <link href="/static/css/sb-admin-2.min.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+    <link rel="icon" href="/static/index/images/favicon.png">
     <script>
         function getcrs(value) {
             console.log(value);
@@ -39,29 +40,29 @@
                 }
             });
         }
-        function savestd(){
+        function savestd() {
             console.log('hello');
             $.ajax({
                 url: '/create_student',
                 data: {
-                    clid    : document.getElementById('clid').value,
-                    stname  : document.getElementById('stname').value,
-                    stgendr :document.getElementById('stgendr').value,
-                    stage   :document.getElementById('stage').value,
-                    ststate : document.getElementById('ststate').value,
-                    stdist  : document.getElementById('stdist').value,
-                    stcity  : document.getElementById('stcity').value,
-                    stpin   : document.getElementById('stpin').value,
-                    stph    : document.getElementById('stph').value,
-                    stemail : document.getElementById('stemail').value,
-                    stcrs   : document.getElementById('stcrs').value,
-                    uname   : document.getElementById('uname').value,
-                    pwd     : document.getElementById('pwd').value
+                    clid: document.getElementById('clid').value,
+                    stname: document.getElementById('stname').value,
+                    stgendr: document.getElementById('stgendr').value,
+                    stage: document.getElementById('stage').value,
+                    ststate: document.getElementById('ststate').value,
+                    stdist: document.getElementById('stdist').value,
+                    stcity: document.getElementById('stcity').value,
+                    stpin: document.getElementById('stpin').value,
+                    stph: document.getElementById('stph').value,
+                    stemail: document.getElementById('stemail').value,
+                    stcrs: document.getElementById('stcrs').value,
+                    uname: document.getElementById('uname').value,
+                    pwd: document.getElementById('pwd').value
                 },
                 type: 'POST',
                 success: function (response) {
                     console.log("GGG ", response);
-                    window.location.href = '/login ';  
+                    window.location.href = '/login ';
                 },
                 error: function (error) {
 
@@ -166,11 +167,10 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                    <select id="stcrs" name="stcrs"  class="form-control"
-                                        placeholder="Course" >
-                                        <option disabled="disabled" selected="selected" value="null">Choose Course
-                                        </option>
-                                    </select>
+                                <select id="stcrs" name="stcrs" class="form-control" placeholder="Course">
+                                    <option disabled="disabled" selected="selected" value="null">Choose Course
+                                    </option>
+                                </select>
                             </div>
                             <button class="btn btn-primary  btn-block" data-toggle="modal" data-target="#st_cr_modal">
                                 REGISTER
