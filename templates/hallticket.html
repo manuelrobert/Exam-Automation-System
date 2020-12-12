@@ -122,8 +122,7 @@
             </div>
 
 
-
-
+            {%for i in a%}
             <div id="div1" class="block">
                 <div class="form-body">
 
@@ -136,12 +135,8 @@
 
                                             <td>
                                                 <div>
-                                                    <span
-                                                        style="color: red; font-size: 30px; font-weight: bold;padding-left: 80px;">Examinations
-                                                        Name</span>
-                                                    <span
-                                                        style="color: #000; font-size: 20px; font-weight: bold; padding-left: 160px;">
-                                                        Hall Ticket</span><br />
+                                                    <span style="color: red; font-size: 30px; font-weight: bold;padding-left: 80px;">{{i[5]}} {{i[6]}}</span>
+                                                    <span style="color: #000; font-size: 20px; font-weight: bold; padding-left: 160px;">Hall Ticket - Semester {{i[9]}}</span><br />
                                                 </div>
                                             </td>
                                         </tr>
@@ -153,7 +148,7 @@
                                     <span style="color: #000; font-weight: bold;">(Information as furnished by the
                                         Candidate)</span><br />
                                     <span style="float: right; margin-right: 30px; font-size: 15px; font-weight: bold;">
-                                        Hall Ticket NO</span><br />
+                                        {{i[5]}}</span><br />
                                     <br />
                                     <div
                                         style="float: right; border: 1px solid; width: 180px; height: 35px; margin-right: 7px;">
@@ -178,57 +173,46 @@
                                             font-weight: bold;">
                                         <tr>
                                             <td style="padding-left: 10px;">
-                                                NAME
+                                                Roll Number
                                             </td>
                                             <td>
                                                 :
                                             </td>
                                             <td>
-
+                                                {{i[0]}}
                                             </td>
                                         </tr>
                                         <tr>
                                             <td style="padding-left: 10px;">
-                                                Father name
+                                                Name
                                             </td>
                                             <td>
                                                 :
                                             </td>
                                             <td>
-
+                                                {{i[1]}}
                                             </td>
                                         </tr>
                                         <tr>
                                             <td style="padding-left: 10px;">
-                                                Mobile No
+                                                Course
                                             </td>
                                             <td>
                                                 :
                                             </td>
                                             <td>
-
+                                                {{i[3]}}
                                             </td>
                                         </tr>
                                         <tr>
                                             <td style="padding-left: 10px;">
-                                                Category
+                                                College
                                             </td>
                                             <td>
                                                 :
                                             </td>
                                             <td>
-
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td style="padding-left: 10px;">
-                                                Address
-                                            </td>
-                                            <td>
-                                                :
-                                            </td>
-                                            <td>
-
+                                                {{i[2]}}
                                             </td>
                                         </tr>
                                     </table>
@@ -240,14 +224,14 @@
                                             font-weight: bold;">
                                         <tr>
                                             <td style="background: #ddd; text-align: center; border-bottom: 1px solid;">
-                                                <span>Test Date & Time</span>
+                                                <span>Test Date</span>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td style="text-align: center;">
-                                                <span>08-10-2017</span><br />
-                                                <span>Sunday</span><br />
-                                                <span>10.00 AM To 1.00 PM</span>
+                                                <span>{{i[7]}}</span><br />
+                                                <span>to</span><br />
+                                                <span>{{i[8]}}</span>
                                             </td>
                                         </tr>
                                     </table>
@@ -264,9 +248,9 @@
                                         </tr>
                                         <tr>
                                             <td style="text-align: center;">
-                                                <span>Acharya Nagarjuna University</span><br />
-                                                <span>Guntur, Andhra Pradesh-522510</span><br />
-                                                <span>Phone No:8688 8896 33</span>
+                                                <span>{{i[2]}}</span><br />
+                                                <!-- <span>Guntur, Andhra Pradesh-522510</span><br />
+                                                <span>Phone No:8688 8896 33</span> -->
                                             </td>
                                         </tr>
                                     </table>
@@ -294,7 +278,7 @@
             </div>
 
             <button>Print</button>
-
+            {%endfor%}
 
             <!-- /.container-fluid -->
 

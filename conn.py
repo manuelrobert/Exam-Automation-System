@@ -466,3 +466,10 @@ def uplres(eid, cid, sid, rno, qse, qid, ans, sml, mar):
 	z = con.cursor()
 	z.execute("insert into tbl_results (exmid, crsid, subid, stid, qsect, qid, ans, sml, marks) values('"+ str(eid) +"', '"+ str(cid) +"', '"+ str(sid) +"', '"+ str(rno) +"', '"+ str(qse) +"', '"+ str(qid) +"', '"+ str(ans) +"', '"+ str(sml) +"', '"+ str(mar) +"')")
 	con.commit()
+
+def gethallticket(uname):
+	print(uname)
+	z = con.cursor()
+	z.execute("select a.stid, a.stname, b.clname, c.crsname, c.crsctgry, d.exid, d.exname, d.exsdt, d.exedt, d.exsem  from tbl_students a, tbl_colleges b, tbl_courses c, tbl_exams d, tbl_exregister e where a.stuname = '"+ str(uname) +"' and a.stclid = b.clid and a.stcid = c.cid and c.cid = d.excrsid and e.exmid = d.exid and e.stid = a.stid")
+	res = z.fetchall()
+	return res

@@ -644,7 +644,9 @@ def stexam():
 	#Hall ticket generation route
 @app.route('/hallticket')
 def hallticket():
-	return render_template('hallticket.html')
+	res = conn.gethallticket(session['uname'])
+	print(res)
+	return render_template('hallticket.html', a=res)
 	
 
 @app.route('/regexam', methods = ['GET', 'POST'])
