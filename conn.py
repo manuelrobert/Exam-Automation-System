@@ -473,3 +473,9 @@ def gethallticket(uname):
 	z.execute("select a.stid, a.stname, b.clname, c.crsname, c.crsctgry, d.exid, d.exname, d.exsdt, d.exedt, d.exsem  from tbl_students a, tbl_colleges b, tbl_courses c, tbl_exams d, tbl_exregister e where a.stuname = '"+ str(uname) +"' and a.stclid = b.clid and a.stcid = c.cid and c.cid = d.excrsid and e.exmid = d.exid and e.stid = a.stid")
 	res = z.fetchall()
 	return res
+
+def getstdexamsub(exid, subid):
+	z = con.cursor()
+	z.execute("select a.stid from tbl_students a, tbl_exregister b, tbl_exams c, tbl_subjects d where a.stid = b.stid and b.exmid = '"+ str(exid) +"' and c.excrsid = d.cid and d.sbid = '"+ str(subid) +"'")
+	res = z.fetchall()
+	return res

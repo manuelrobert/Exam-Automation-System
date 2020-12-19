@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>SMARTxams - Teacher</title>
+
+    <!-- Custom fonts for this template-->
+    <link href="/static/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link href="/static/css/sb-admin-2.min.css" rel="stylesheet">
+    <script>
+        function getSubjects(value) {
+            var ar = value.split("-");
+            console.log(ar);
+            $.ajax({
+                url: '/getsubs',
+                data: {
+                    exid: ar[0],
+                    cid: ar[1]
+                },
+                type: 'POST',
+                success: function (response) {
+                    console.log(response);
+                    if (response == "empty") {
+                        //reponse empty handling
+                    } else {
+                        $("#sub").html(response);
+                    }
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            });
+        };
+
+        function getstd(value){
+            var ar = value.split("-");
+            console.log(ar);
+            $.ajax({
+                url: '/getstd',
+                data: {
+                    sid:ar[0],
+                    exid:ar[1],
+                    cid:ar[2]
+                },
+                type: 'POST',
+                success: function (response) {
+                    console.log(response);
+                    if (response == "empty") {
+                        //reponse empty handling
+                    } else {
+                        $("#std").html(response);
+                    }
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            });
+        };
+
+        function valform(value){
+            var ar = value.split("-");
+            console.log(ar);
+            $.ajax({
+                url: '/getqppr',
+                data: {
+                    exid:ar[0],
+                    sid:ar[1],
+                    cid:ar[2]
+                },
+                type: 'POST',
+                success: function (response) {
+                    console.log(response);
+                    if (response == "empty") {
+                        //reponse empty handling
+                    } else {
+                        // $("#std").html(response);
+                    }
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            });
+        };
+    </script>
+
+</head>
+
+<body id="page-top">
+
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+        {% include "thsidenavbar.html" %}
+        {% include "thtopnavbar.html" %}
+        <!-- Begin Page Content -->
+        <div class="container-fluid">
+
+            <!-- Page Heading -->
+            <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                <h1 class="h3 mb-0 text-gray-800">Answer Sheet Valuation</h1>
+            </div>
+
+            <!-- Content Row -->
+            <div class="column">
+
+                <div class="form-group">
+                    <select name="exm" id="exm" class="form-control" placeholder="Examinations" onchange="getSubjects(value)">
+                        <option disabled="disabled" selected="selected" value="null">Choose Examination</option>
+                        {%for i in a%}
+                        <option value={{i[0]}}-{{i[7]}}>{{i[1]}}-{{i[2]}}-{{i[3]}}-{{i[4]}}-Semester:{{i[5]}}</option>
+                        {%endfor%}
+                    </select>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-6 mb-3 mb-sm-0">
+                        <div id="sub">
+                            <select name="sub" id="sub" class="form-control" placeholder="Type">
+                                <option disabled="disabled" selected="selected" value="null">Choose Subject</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div id="std">
+                            <select name="std" id="std" class="form-control" placeholder="Type">
+                                <option disabled="disabled" selected="selected" value="null">Choose Student</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+            <!-- /.container-fluid -->
+
+        </div>
+        <!-- End of Main Content -->
+    </div>
+    <!-- Footer -->
+    <footer class="sticky-footer bg-white">
+        <div class="container my-auto">
+            <div class="copyright text-center my-auto">
+                <span>Copyright &copy; Your Website 2019</span>
+            </div>
+        </div>
+    </footer>
+    <!-- End of Footer -->
+
+    </div>
+    <!-- End of Content Wrapper -->
+
+    </div>
+    <!-- End of Page Wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+
+
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="/static/vendor/jquery/jquery.min.js"></script>
+    <script src="/static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="/static/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="/static/js/sb-admin-2.min.js"></script>
+
+    <!-- Page level plugins -->
+    <script src="/static/vendor/chart.js/Chart.min.js"></script>
+
+    <!-- Page level custom scripts -->
+    <script src="/static/js/demo/chart-area-demo.js"></script>
+    <script src="/static/js/demo/chart-pie-demo.js"></script>
+    <!-- modal -->
+    <div class="modal fade" id="q_up_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Subject Details</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div id="ttb">
+
+                </div>
+                <div class="modal-footer">
+                    <div id="cbt">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- modal -->
+
+</body>
+
+</html>

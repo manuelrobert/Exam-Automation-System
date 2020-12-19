@@ -659,6 +659,60 @@ def regexam():
 		conn.regexam(request.form['eid'], session['uname'])
 		return "Successfully registered for the examination"
 
+@app.route('/thvaluate')
+def thvaluate():
+	res = conn.getexam()
+	print(res)
+	return render_template('tchvaluation.html', a=res)
+
+@app.route('/getsubs', methods = ['GET', 'POST'])
+def getsubs():
+	res = conn.getsubexm(request.form['exid'])
+	print(res)
+	if res:
+		r="""
+			<select name="sub" id="sub" class="form-control" placeholder="Type" onchange="getstd(value)">
+				<option disabled="disabled" selected="selected" value="null">Choose Subject</option>
+		"""
+		for i in res:
+			r=r + """
+				<option value=""" + str(i[0])+"-"+ str(request.form['exid'])+"-"+str(request.form['cid']) +""">""" + str(i[1])+"""</option>
+			"""
+		r=r + """
+			</select>
+		"""
+	else:
+		r="empty"
+	return r
+
+@app.route('/getstd', methods = ['GET', 'POST'])
+def getstds():
+	res = conn.getstdexamsub(request.form['exid'], request.form['sid'])
+	print(res)
+	if res:
+		r="""
+			<select name="std" id="std" class="form-control" placeholder="Type" onchange="valform(value)">
+				<option disabled="disabled" selected="selected" value="null">Choose Student</option>
+		"""
+		for i in res:
+			r=r + """
+				<option value="""+str(request.form['exid'])+"-"+str(request.form['sid'])+"-"+ str(request.form['cid'])+"-"+str(i[0]) +""">""" + str(i[0])+"""</option>
+			"""
+		r=r + """
+			</select>
+		"""
+	else:
+		r="empty"
+	return r
+
+
+@app.route('/getqppr', methods = ['GET', 'POST'])
+def getqppr():
+	res = conn.getqstp(request.form['sid'], request.form['exid'], request.form['cid'])
+	print("question paper",res)
+	return "success"
+
+
 # @app.route('/subfiledata', methods = ['GET', 'POST'])
 # def subfiledata():
 # 	file  = request.files['file']
