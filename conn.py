@@ -11,6 +11,7 @@ def id_generator(chars='SMART'):
 	return chars + rst
 
 def login(uname, pwd):
+	print(uname, pwd)
 	z = con.cursor()
 	z.execute("select * from tbl_users where uname='"+ str(uname) +"' and pwd='"+ str(pwd) +"' and status = 1")
 	res = z.fetchall()
@@ -479,3 +480,9 @@ def getstdexamsub(exid, subid):
 	z.execute("select a.stid from tbl_students a, tbl_exregister b, tbl_exams c, tbl_subjects d where a.stid = b.stid and b.exmid = '"+ str(exid) +"' and c.excrsid = d.cid and d.sbid = '"+ str(subid) +"'")
 	res = z.fetchall()
 	return res
+
+def saveres(eid, cid, sid, rno, qse, qid, mar):
+	print('finally',eid, cid, sid, rno, qse, qid, mar)
+	z = con.cursor()
+	z.execute("insert into tbl_results (exmid, crsid, subid, stid, qsect, qid, marks) values('"+ str(eid) +"', '"+ str(cid) +"', '"+ str(sid) +"', '"+ str(rno) +"', '"+ str(qse) +"', '"+ str(qid) +"', '"+ str(mar) +"')")
+	con.commit()
