@@ -25,6 +25,11 @@ def user_login():
 def forgot_password():
 	return render_template('forgot-password.html')
 
+@app.route('/stexamresult')
+def stexamresult():
+	return render_template('stexamresult.html')
+
+
 @app.route('/log_ver', methods=['GET', 'POST'])
 def log_ver():
 	res = conn.login(request.form['uname'], request.form['pwd'])
@@ -40,7 +45,9 @@ def log_ver():
 			return render_template('studash.html')
 	else:
 		print('no')
-		return render_template('login.html')
+		return render_template('login.html',status=True)
+
+
 
 @app.route('/comanage')
 def course_manage():
