@@ -708,9 +708,51 @@ def getstds():
 
 @app.route('/getqppr', methods = ['GET', 'POST'])
 def getqppr():
-	res = conn.getqstp(request.form['sid'], request.form['exid'], request.form['cid'])
-	print("question paper",res)
-	return "success"
+	temp = conn.tempexm(request.form['exid'], request.form['cid'])
+	res = conn.getquestionpaper(request.form['exid'], request.form['cid'])
+	print("dddd",temp)
+	r=""
+	r = r + """
+			<div class="form-group">
+					""" + str(res[0][0][0][0])+ " : "+ str(res[0][0][0][1])+ " (" + str(res[0][0][0][2])+  " marks in " +str(res[0][0][0][3])+" minutes.)"+"""
+			</div> 
+		"""
+	for i in res[0][0][1]:
+		print("zzz",i)
+		r = r + """
+			<div class="form-group">
+				""" + "Part: "+str(i[0]) + "-  ( "+str(i[1])+" questions carrying "+str(i[2])+" marks each" +" )"+"""
+			</div>
+		"""
+		for j in res[0][1]:
+			if i[0]==j[1]:
+				print("xxx",j)
+				r = r + """
+					<div class="form-group">
+					""" + str(j[0]) + ": "+ str(j[2]) +"""
+					</div>
+					<div class="form-group">
+						<div class="col-sm-1">
+                        	<input type="text" name=""" + str(i[0])+"-"+str(j[0]) +""" id="usbsem" class="form-control" placeholder="Marks">
+                    	</div>
+					</div>
+				"""
+	r = r + """
+		 <input type="submit" value="Submit" class="btn btn-primary btn-user btn-block">
+	"""
+	return r
+
+@app.route('/sub_valuated', methods = ['GET', 'POST'])
+def sub_valuated():
+	keys = list(request.form.keys())
+	vals = request.form['std'].split('-')
+	for i in keys:
+		if keys.index(i) not in [0, 1, 2]:
+			ar = i.split('-')
+			conn.saveres(vals[0], vals[2], vals[1], vals[3], ar[0], ar[1], request.form[i])
+			# print(vals[0], vals[2], vals[1], vals[3], ar[0], ar[1], request.form[i])
+	# print("hhhh",keys)
+	return redirect('/thvaluate')
 
 
 # @app.route('/subfiledata', methods = ['GET', 'POST'])
