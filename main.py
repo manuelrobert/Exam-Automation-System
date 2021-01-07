@@ -27,7 +27,41 @@ def forgot_password():
 
 @app.route('/stexamresult')
 def stexamresult():
-	return render_template('stexamresult.html')
+	res = conn.getexmstd(session['uname'])
+	return render_template('stexamresult.html', a = res)
+
+@app.route('/viewresult', methods=['GET', 'POST'])
+def viewresult():
+	res = conn.getresult(request.form['eid'], session['uname'])
+	print(res[0])
+	r ="""
+		<div class="d-sm-flex align-items-center justify-content-between mb-4">
+                <h1 class="h5 mb-0 text-gray-800">"""+ str(res[0][0])+ " " +str(res[0][1]) + " " +str(res[0][2]) + " " +str(res[0][3]) +"""</h1>
+            </div>
+		<table class="table">
+                <thead class="thead-dark">
+                    <tr>
+
+                        <th scope="col">Subject</th>
+                        <th scope="col">Semester</th>
+                        <th scope="col">Mark/Grade</th>
+                        <th scope="col">Status</th>
+                    </tr>
+                </thead>
+                <tbody>"""
+	for i in res:
+		r = r + """
+					<tr>
+                        <th scope="row">"""+str(i[5])+"""</th>
+                        <td>"""+str(i[6])+"""</td>
+                        <td>"""+str(i[7])+"""</td>"""
+		r = r + """<td>Passed</td>"""
+		r = r + """</tr>"""
+	r = r + """
+                </tbody>
+            </table>
+	"""
+	return r
 
 
 @app.route('/log_ver', methods=['GET', 'POST'])
@@ -131,7 +165,7 @@ def subject_manage():
 	for i in r:
 		res.append((i[0], i[1]))
 	return render_template('adsumanage.html', a = res)
-	
+
 @app.route('/get_sub', methods=['GET', 'POST'])
 def get_sub():
 	res = conn.getsub(request.form['cid'])
@@ -262,7 +296,7 @@ def qppmanage():
 	exms = conn.getexm()
 	print('exms', exms)
 	e = []
-	for i in exms:	
+	for i in exms:
 		sect = conn.getqppsect(i[7])
 		print('sect',sect)
 		e.append((i, sect))
@@ -457,7 +491,7 @@ def thqpan_subject():
 					<div class="form-group">
                    		 <textarea  name="questkey" rows="5" class="form-control" id="questkey" placeholder="Answer Key"></textarea>
                   	</div>"""
-		
+
 		return r
 
 @app.route('/thqpan_st', methods = ['GET', 'POST'])
@@ -570,7 +604,7 @@ def gen_qp():
 							b = random.choice(q)
 							conn.insqst(exm[0][0], exm[0][3], i[0], qst[m][0], b[0])
 						if qst[m][2] <= a:
-							a = a - qst[m][2] 
+							a = a - qst[m][2]
 						m = m + 1
 						if qst[m][2] > a:
 							m = 0
@@ -654,7 +688,7 @@ def hallticket():
 	res = conn.gethallticket(session['uname'])
 	print(res)
 	return render_template('hallticket.html', a=res)
-	
+
 
 @app.route('/regexam', methods = ['GET', 'POST'])
 def regexam():
@@ -722,7 +756,7 @@ def getqppr():
 	r = r + """
 			<div class="form-group">
 					""" + str(res[0][0][0][0])+ " : "+ str(res[0][0][0][1])+ " (" + str(res[0][0][0][2])+  " marks in " +str(res[0][0][0][3])+" minutes.)"+"""
-			</div> 
+			</div>
 		"""
 	for i in res[0][0][1]:
 		print("zzz",i)

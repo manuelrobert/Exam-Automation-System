@@ -124,7 +124,7 @@ def getteacher(uname):
 	z.execute("select a.trid, a.trname, a.trgendr, a.trstate, a.trdist, a.trcity, a.trpin, a.trph, a.tremail, b.status, c.crsname, a.truname from tbl_teachers a, tbl_users b, tbl_courses c, tbl_colleges d where a.truname = b.uname and a.trcid = c.cid and a.trclid = d.clid and d.uname = '"+str(uname)+"'")
 	res = z.fetchall()
 	return res
-	
+
 def getstudents(uname):
 	z = con.cursor()
 	z.execute("select a.stid, a.stname, a.stgendr, a.stage, a.ststate, a.stdist, a.stcity, a.stpin, a.stph, a.stemail, a.stuname, b.status, c.crsname from tbl_students a, tbl_users b, tbl_courses c, tbl_colleges d where a.stuname = b.uname and a.stcid = c.cid and a.stclid = d.clid and d.uname = '"+str(uname)+"'")
@@ -134,7 +134,7 @@ def getstudents(uname):
 
 def createexam(exname, exsdt, exedt, excrsid, exrfee, exsem):
 	z = con.cursor()
-	z.execute("insert into tbl_exams values ('"+str(id_generator('EXM'))+"', '"+str(exname)+"', '"+str(exsdt)+"', '"+str(exedt)+"', '"+str(excrsid)+"', '"+str(exsem)+"', '"+str(exrfee)+"')") 
+	z.execute("insert into tbl_exams values ('"+str(id_generator('EXM'))+"', '"+str(exname)+"', '"+str(exsdt)+"', '"+str(exedt)+"', '"+str(excrsid)+"', '"+str(exsem)+"', '"+str(exrfee)+"')")
 	con.commit()
 
 def getexam():
@@ -291,7 +291,7 @@ def getqst(eid):
 	return res
 
 def getinpqst(eid, sid, sectid, mod):
-	print('ins', eid, sid, sectid, mod)	
+	print('ins', eid, sid, sectid, mod)
 	z = con.cursor()
 	z.execute("select b.qid, b.quest from tbl_question_panels a, tbl_question_pools b where a.exmid = '"+str(eid)+"' and a.subid = '"+str(sid)+"' and a.plid = b.qplid and b.qsect = '"+str(sectid)+"' and b.qsmod = '"+str(mod)+"'")
 	res = z.fetchall()
@@ -371,7 +371,7 @@ def getquestppr(eid, sid):
 	z = con.cursor()
 	z.execute("select a.qid, a.sect, b.quest from tbl_gen_qp a, tbl_question_pools b where a.eid = '"+ str(eid) +"' and a.sid = '"+ str(sid) +"' and a.qid = b.qid")
 	res1 = z.fetchall()
-	z.execute("select b.qppart, b.qpnoq, b.qpmina, b.qpmpq,b.qpdurn from tbl_question_papers a, tbl_question_parts b where a.qexmid = '"+ str(eid) +"' and a.qppid = b.qppid")	
+	z.execute("select b.qppart, b.qpnoq, b.qpmina, b.qpmpq,b.qpdurn from tbl_question_papers a, tbl_question_parts b where a.qexmid = '"+ str(eid) +"' and a.qppid = b.qppid")
 	res2 = z.fetchall()
 	z.execute("select * from tbl_question_papers where qexmid = '"+ str(eid) +"'")
 	res3 = z.fetchall()
@@ -486,3 +486,16 @@ def saveres(eid, cid, sid, rno, qse, qid, mar):
 	z = con.cursor()
 	z.execute("insert into tbl_results (exmid, crsid, subid, stid, qsect, qid, marks) values('"+ str(eid) +"', '"+ str(cid) +"', '"+ str(sid) +"', '"+ str(rno) +"', '"+ str(qse) +"', '"+ str(qid) +"', '"+ str(mar) +"')")
 	con.commit()
+
+def getexmstd(uname):
+	print(uname)
+	z = con.cursor()
+	z.execute("select c.exid, c.exname, c.exsdt, c.exedt, c.exsem from tbl_students a, tbl_exregister b, tbl_exams c where a.stuname = '"+ str(uname) +"' and a.stid = b.stid and b.exmid = c.exid")
+	res = z.fetchall()
+	return res
+
+def getresult(eid, uname):
+	z = con.cursor()
+	z.execute("select b.exid, b.exname, c.cid, c.crsname,d.sbid, d.sbname, d.sem, sum(a.marks) from tbl_results a, tbl_exams b, tbl_courses c, tbl_subjects d, tbl_students e where a.exmid = '"+ str(eid) +"' and b.exid = a.exmid and e.stuname = '"+ str(uname) +"' and a.crsid = c.cid and a.subid = d.sbid and a.stid = e.stid group by a.subid")
+	res = z.fetchall()
+	return res
